@@ -2,6 +2,7 @@
 {
     public class EventoPalestrante
     {
+        public int id { get; set; }
         public int EventoId { get; set; }
         public Evento? Evento { get; set; }
         public int PalestranteId { get; set; }
