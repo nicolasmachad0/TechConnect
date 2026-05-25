@@ -1,8 +1,108 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<TechConnect.Models.Evento>
+
+@{
+    ViewData["Title"] = "TechConnect";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container-fluid p-0">
+
+    <div class="bg-dark text-white text-center py-5 mb-5">
+
+        <div class="container">
+
+            <h1 class="display-3 fw-bold mb-4">
+                Bem-vindo ao TechConnect
+            </h1>
+
+            <p class="lead mb-4">
+                Acesse os principais eventos de tecnologia,
+                inovação e desenvolvimento do Brasil.
+            </p>
+
+            <a href="/Eventos"
+               class="btn btn-primary btn-lg px-5">
+                Explorar Eventos
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container">
+
+    <div class="text-center mb-5">
+
+        <h2 class="fw-bold text-primary">
+            Próximos Eventos
+        </h2>
+
+        <p class="text-secondary">
+            Confira os eventos cadastrados na plataforma
+        </p>
+
+    </div>
+
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+
+                <div class="card shadow border-0 h-100">
+
+                    @if (!string.IsNullOrEmpty(item.Imagem))
+                    {
+                        <img src="@item.Imagem"
+                             class="card-img-top"
+                             style="height: 220px; object-fit: cover;" />
+                    }
+                    else
+                    {
+                        <img src="https://via.placeholder.com/500x250"
+                             class="card-img-top" />
+                    }
+
+                    <div class="card-body">
+
+                        <h4 class="fw-bold">
+                            @item.Nome
+                        </h4>
+
+                        <p class="text-muted">
+                            @item.Descricao
+                        </p>
+
+                        <p class="mb-1">
+                            <strong>Data:</strong>
+                            @item.Data.ToString("dd/MM/yyyy")
+                        </p>
+
+                        <p class="mb-1">
+                            <strong>Horário:</strong>
+                            @item.Horario
+                        </p>
+
+                        <p class="mb-3">
+                            <strong>Local:</strong>
+                            @item.Local
+                        </p>
+
+                        <a href="/Eventos/Details/@item.Id"
+                           class="btn btn-primary w-100">
+
+                            Ver Evento
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
 </div>

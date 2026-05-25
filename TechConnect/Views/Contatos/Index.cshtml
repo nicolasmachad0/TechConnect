@@ -1,59 +1,136 @@
 ﻿@model IEnumerable<TechConnect.Models.Contato>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Contatos";
 }
 
-<h1>Index</h1>
+<div class="container mt-4">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Assunto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Mensagem)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataEnvio)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Assunto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mensagem)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataEnvio)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+
+        <div>
+            <h1 class="fw-bold text-primary">Contatos</h1>
+
+            <p class="text-secondary">
+                Gerencie as mensagens enviadas pelos usuários
+            </p>
+        </div>
+
+        <div>
+            <a asp-action="Create" class="btn btn-primary">
+                + Novo Contato
+            </a>
+        </div>
+
+    </div>
+
+    <div class="mb-4">
+
+        <input type="text"
+               id="buscarContato"
+               class="form-control"
+               placeholder="Buscar contato por nome, email ou assunto..." />
+
+    </div>
+
+    <div class="row" id="listaContatos">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 mb-4 card-contato">
+
+                <div class="card shadow border-0 h-100">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+
+                            <div>
+
+                                <h4 class="fw-bold mb-1">
+                                    @item.Nome
+                                </h4>
+
+                                <p class="text-muted mb-0">
+                                    @item.Email
+                                </p>
+
+                            </div>
+
+                            <span class="badge bg-primary">
+                                @item.DataEnvio.ToString("dd/MM/yyyy")
+                            </span>
+
+                        </div>
+
+                        <h5 class="text-primary">
+                            @item.Assunto
+                        </h5>
+
+                        <p class="text-secondary">
+                            @item.Mensagem
+                        </p>
+
+                    </div>
+
+                    <div class="card-footer bg-white border-0">
+
+                        <div class="d-flex justify-content-center gap-2 flex-wrap">
+
+                            <a asp-action="Details"
+                               asp-route-id="@item.Id"
+                               class="btn btn-outline-primary btn-sm">
+                                Detalhes
+                            </a>
+
+                            <a asp-action="Edit"
+                               asp-route-id="@item.Id"
+                               class="btn btn-outline-warning btn-sm">
+                                Editar
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@item.Id"
+                               class="btn btn-outline-danger btn-sm">
+                                Excluir
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>
+
+<script>
+
+    const buscaContato = document.getElementById('buscarContato');
+
+    buscaContato.addEventListener('keyup', function () {
+
+        let filtro = buscaContato.value.toLowerCase();
+
+        let cards = document.querySelectorAll('.card-contato');
+
+        cards.forEach(card => {
+
+            let texto = card.innerText.toLowerCase();
+
+            if (texto.includes(filtro)) {
+                card.style.display = '';
+            }
+            else {
+                card.style.display = 'none';
+            }
+
+        });
+
+    });
+
+</script>

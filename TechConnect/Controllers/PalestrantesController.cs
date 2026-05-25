@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TechConnect.Data;
 using TechConnect.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TechConnect.Controllers
 {
