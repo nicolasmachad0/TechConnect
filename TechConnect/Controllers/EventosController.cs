@@ -24,7 +24,14 @@ namespace TechConnect.Controllers
         // GET: Eventos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Evento.ToListAsync());
+            var eventos = await _context.Evento
+                .Include(e => e.EventoCategorias)
+                    .ThenInclude(ec => ec.Categoria)
+                .Include(e => e.EventoPalestrantes)
+                    .ThenInclude(ep => ep.Palestrante)
+                .ToListAsync();
+
+            return View(eventos);
         }
 
         // GET: Eventos/Details/5
@@ -36,7 +43,15 @@ namespace TechConnect.Controllers
             }
 
             var evento = await _context.Evento
+
+                .Include(e => e.EventoCategorias)
+                    .ThenInclude(ec => ec.Categoria)
+
+                .Include(e => e.EventoPalestrantes)
+                    .ThenInclude(ep => ep.Palestrante)
+
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (evento == null)
             {
                 return NotFound();

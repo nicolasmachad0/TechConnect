@@ -78,6 +78,28 @@
                             @item.Local
                         </p>
 
+                        <p>
+                            <strong>Categorias:</strong>
+
+                            @foreach (var categoria in item.EventoCategorias)
+                            {
+                                <span class="badge bg-primary me-1">
+                                    @categoria.Categoria?.Nome
+                                </span>
+                            }
+                        </p>
+
+                        <p>
+                            <strong>Palestrantes:</strong>
+
+                            @foreach (var palestrante in item.EventoPalestrantes)
+                            {
+                                <span class="badge bg-info text-dark me-1">
+                                    @palestrante.Palestrante?.NomeCompleto
+                                </span>
+                            }
+                        </p>
+
                     </div>
 
                     <div class="card-footer bg-white border-0">

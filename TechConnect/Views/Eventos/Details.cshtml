@@ -6,53 +6,76 @@
 
 <h1>Details</h1>
 
-<div>
-    <h4>Evento</h4>
+<div class="card p-4 shadow-lg border-0">
+
+    <img src="@Model.Imagem"
+         class="img-fluid rounded shadow mb-4"
+         style="max-height:400px;
+                width:100%;
+                object-fit:cover;" />
+
+    <h1 class="mb-3 fw-bold">
+        @Model.Nome
+    </h1>
+
+    <p class="mb-4 text-secondary">
+        @Model.Descricao
+    </p>
+
+    <div class="mb-2">
+        <strong>📅 Data:</strong>
+        @Model.Data.ToShortDateString()
+    </div>
+
+    <div class="mb-2">
+        <strong>⏰ Horário:</strong>
+        @Model.Horario
+    </div>
+
+    <div class="mb-4">
+        <strong>📍 Local:</strong>
+        @Model.Local
+    </div>
+
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Data)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Data)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Horario)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Horario)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Local)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Local)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Imagem)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Imagem)
-        </dd>
-    </dl>
-</div>
-<div>
-     @if (User.Identity.Name == "admin@techconnect.com")
+
+    <h5 class="mb-3">Categorias</h5>
+
+    @foreach (var categoria in Model.EventoCategorias)
     {
-        <a asp-action="Edit" asp-route-id="@Model?.Id">Editar</a>
+        <span class="badge bg-primary me-2 mb-2 p-2">
+            @categoria.Categoria?.Nome
+        </span>
     }
-    |
-    <a asp-action="Index">Voltar</a>
+
+    <hr />
+
+    <h5 class="mb-3">Palestrantes</h5>
+
+    @foreach (var palestrante in Model.EventoPalestrantes)
+    {
+        <span class="badge bg-info text-dark me-2 mb-2 p-2">
+            @palestrante.Palestrante?.NomeCompleto
+        </span>
+    }
+
+    <div class="mt-4 d-flex gap-2 flex-wrap">
+
+        @if (User.Identity.Name == "admin@techconnect.com")
+        {
+            <a asp-action="Edit"
+               asp-route-id="@Model?.Id"
+               class="btn btn-primary">
+
+                Editar
+
+            </a>
+        }
+
+        <a asp-action="Index"
+           class="btn-voltar">
+            Voltar
+        </a>
+
+    </div>
 </div>

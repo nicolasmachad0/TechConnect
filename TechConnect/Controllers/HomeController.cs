@@ -21,7 +21,15 @@ namespace TechConnect.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var eventos = await _context.Evento.ToListAsync();
+            var eventos = await _context.Evento
+
+                .Include(e => e.EventoCategorias)
+                    .ThenInclude(ec => ec.Categoria)
+
+                .Include(e => e.EventoPalestrantes)
+                    .ThenInclude(ep => ep.Palestrante)
+
+                .ToListAsync();
 
             return View(eventos);
         }
