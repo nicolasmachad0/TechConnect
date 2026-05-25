@@ -57,3 +57,177 @@ TechConnect/
 │
 └── Program.cs
 
+# 🔐 Sistema de Autenticação
+
+O sistema utiliza o ASP.NET Identity para autenticação de usuários.
+
+Existem dois tipos de acesso:
+
+👤 Usuário comum
+
+Pode:
+
+Visualizar eventos
+Visualizar palestrantes
+Visualizar detalhes
+Enviar contato
+
+Não pode:
+
+Criar eventos
+Editar eventos
+Excluir informações
+👑 Administrador
+
+O administrador possui acesso total ao sistema.
+
+Pode:
+
+Criar eventos
+Editar eventos
+Excluir eventos
+Gerenciar categorias
+Gerenciar palestrantes
+Gerenciar contatos
+🎯 Funcionalidades
+📌 Eventos
+Cadastro completo de eventos
+Upload de banner/imagem
+Data e horário
+Local do evento
+Descrição completa
+Relacionamento com categorias
+Relacionamento com palestrantes
+🧠 Categorias
+Cadastro de categorias
+Busca dinâmica
+Listagem moderna
+Associação aos eventos
+🎤 Palestrantes
+Cadastro de palestrantes
+Foto do palestrante
+Empresa
+Cargo
+Especialidade
+Biografia
+Associação aos eventos
+📨 Contato
+Formulário de contato
+Gerenciamento de mensagens
+Área administrativa
+🔗 Relacionamentos N:N
+
+O projeto utiliza relacionamentos muitos-para-muitos:
+
+EventoCategoria
+
+Relaciona:
+
+Evento
+Categoria
+EventoPalestrante
+
+Relaciona:
+
+Evento
+Palestrante
+Tema da palestra
+📄 Página de Detalhes do Evento
+
+A página de detalhes exibe:
+
+✅ Nome do evento
+✅ Banner
+✅ Descrição completa
+✅ Data
+✅ Horário
+✅ Local
+✅ Categorias
+✅ Lista de palestrantes
+✅ Mini currículo
+✅ Tema da palestra
+✅ Link para detalhes do palestrante
+
+🎨 Interface
+
+O sistema foi desenvolvido com foco em:
+
+Design moderno
+Tema dark
+Responsividade
+Melhor experiência visual
+Navegação intuitiva
+📱 Responsividade
+
+O projeto é totalmente responsivo para:
+
+Desktop
+Tablets
+Smartphones
+⚙️ Como Executar o Projeto
+1️⃣ Clone o repositório
+git clone https://github.com/SEU-USUARIO/TechConnect.git
+2️⃣ Abra o projeto
+
+Abra no:
+
+Visual Studio 2022
+3️⃣ Configure a conexão com o banco
+
+No arquivo:
+
+appsettings.json
+
+Configure sua string de conexão SQL Server.
+
+4️⃣ Execute as migrations
+
+Abra o Package Manager Console:
+
+Update-Database
+5️⃣ Execute o projeto
+
+Pressione:
+
+F5
+
+ou:
+
+Ctrl + F5
+🗃️ Banco de Dados
+
+O sistema utiliza:
+
+SQL Server
+Entity Framework Core Code First
+👨‍💻 Autor
+
+Desenvolvido por:
+
+Nicolas Machado Fogaça
+
+Projeto acadêmico desenvolvido para prática de:
+
+ASP.NET Core MVC
+Entity Framework
+Relacionamentos N:N
+Identity
+CRUD completo
+Responsividade
+Front-end moderno
+📌 Status do Projeto
+
+✅ Em desenvolvimento ativo
+✅ Funcional
+✅ Estrutura MVC completa
+✅ Banco integrado
+✅ Interface moderna
+
+⭐ Futuras Melhorias
+Upload real de imagens
+Dashboard administrativo
+Sistema de inscrições
+Área do participante
+Pesquisa avançada
+API REST
+Deploy online
