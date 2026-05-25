@@ -9,7 +9,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")
         ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found."),
-        sqlOptions => sqlOptions.EnableRetryOnFailure() // resiliência para falhas transitórias
+        sqlOptions => sqlOptions.EnableRetryOnFailure() // resiliï¿½ncia para falhas transitï¿½rias
     ));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
@@ -39,9 +39,9 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapRazorPages(); // necessário para as páginas de login do Identity
+app.MapRazorPages(); // necessï¿½rio para as pï¿½ginas de login do Identity
 
-// Seed do usuário admin (com migração e tratamento de erros)
+// Seed do usuï¿½rio admin (com migraï¿½ï¿½o e tratamento de erros)
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -50,13 +50,13 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<ApplicationDbContext>();
-        // Aplica migrações pendentes (cria banco se necessário)
+        // Aplica migraï¿½ï¿½es pendentes (cria banco se necessï¿½rio)
         await context.Database.MigrateAsync();
 
         var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
-        // Cria a role Admin se não existir
+        // Cria a role Admin se nï¿½o existir
         if (!await roleManager.RoleExistsAsync("Admin"))
         {
             await roleManager.CreateAsync(new IdentityRole("Admin"));
@@ -76,7 +76,7 @@ using (var scope = app.Services.CreateScope())
             await userManager.CreateAsync(admin, senha);
         }
 
-        // Atribui a role Admin ao usuário (verifica null)
+        // Atribui a role Admin ao usuï¿½rio (verifica null)
         var adminUser = await userManager.FindByEmailAsync(email);
         if (adminUser != null && !await userManager.IsInRoleAsync(adminUser, "Admin"))
         {
@@ -85,8 +85,8 @@ using (var scope = app.Services.CreateScope())
     }
     catch (Exception ex)
     {
-        logger.LogError(ex, "Erro ao aplicar migrações / seed do usuário admin.");
-        // opcional: rethrow se quiser que a aplicação falhe ao iniciar
+        logger.LogError(ex, "Erro ao aplicar migraï¿½ï¿½es / seed do usuï¿½rio admin.");
+        // opcional: rethrow se quiser que a aplicaï¿½ï¿½o falhe ao iniciar
         // throw;
     }
 }
