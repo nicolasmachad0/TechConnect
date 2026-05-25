@@ -56,6 +56,7 @@ TechConnect/
 │   └── Identity/
 │
 └── Program.cs
+```
 
 # 🔐 Sistema de Autenticação
 
