@@ -127,11 +127,27 @@ namespace TechConnect.Controllers
                 return NotFound();
             }
 
-            var evento = await _context.Evento.FindAsync(id);
+            var evento = await _context.Evento
+                .Include(e => e.EventoCategorias)
+                .Include(e => e.EventoPalestrantes)
+                .FirstOrDefaultAsync(e => e.Id == id);
+
             if (evento == null)
             {
                 return NotFound();
             }
+
+            ViewBag.Categorias = await _context.Categoria.ToListAsync();
+            ViewBag.Palestrantes = await _context.Palestrante.ToListAsync();
+
+            ViewBag.CategoriasSelecionadas = evento.EventoCategorias
+                .Select(ec => ec.CategoriaId)
+                .ToList();
+
+            ViewBag.PalestrantesSelecionados = evento.EventoPalestrantes
+                .Select(ep => ep.PalestranteId)
+                .ToList();
+
             return View(evento);
         }
 
@@ -140,35 +156,64 @@ namespace TechConnect.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Descricao,Data,Horario,Local,Imagem")] Evento evento)
-        {
-            if (id != evento.Id)
+        public async Task<IActionResult> Edit(
+        int id,
+        Evento evento,
+        int[] CategoriasSelecionadas,
+        int[] PalestrantesSelecionados)
             {
-                return NotFound();
-            }
+                if (id != evento.Id)
+                {
+                    return NotFound();
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                var eventoBanco = await _context.Evento
+
+                    .Include(e => e.EventoCategorias)
+                    .Include(e => e.EventoPalestrantes)
+
+                    .FirstOrDefaultAsync(e => e.Id == id);
+
+                if (eventoBanco == null)
                 {
-                    _context.Update(evento);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+
+                eventoBanco.Nome = evento.Nome;
+                eventoBanco.Descricao = evento.Descricao;
+                eventoBanco.Data = evento.Data;
+                eventoBanco.Horario = evento.Horario;
+                eventoBanco.Local = evento.Local;
+                eventoBanco.Imagem = evento.Imagem;
+
+                // REMOVE categorias antigas
+                _context.RemoveRange(eventoBanco.EventoCategorias);
+
+                // ADICIONA novas categorias
+                foreach (var categoriaId in CategoriasSelecionadas)
                 {
-                    if (!EventoExists(evento.Id))
+                    eventoBanco.EventoCategorias.Add(new EventoCategoria
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                        CategoriaId = categoriaId
+                    });
                 }
+
+                // REMOVE palestrantes antigos
+                _context.RemoveRange(eventoBanco.EventoPalestrantes);
+
+                // ADICIONA novos palestrantes
+                foreach (var palestranteId in PalestrantesSelecionados)
+                {
+                    eventoBanco.EventoPalestrantes.Add(new EventoPalestrante
+                    {
+                        PalestranteId = palestranteId
+                    });
+                }
+
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(evento);
-        }
 
         // GET: Eventos/Delete/5
         public async Task<IActionResult> Delete(int? id)

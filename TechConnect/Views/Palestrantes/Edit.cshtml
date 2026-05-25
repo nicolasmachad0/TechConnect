@@ -1,59 +1,154 @@
 ﻿@model TechConnect.Models.Palestrante
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Palestrante";
 }
 
-<h1>Edit</h1>
+<div class="container py-5">
 
-<h4>Palestrante</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+    <div class="card-dark-form mx-auto" style="max-width: 900px;">
+
+        <div class="mb-4">
+            <h1 class="titulo-form">Editar Palestrante</h1>
+
+            <p class="subtitulo-form">
+                Atualize as informações do palestrante.
+            </p>
+        </div>
+
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="NomeCompleto" class="control-label"></label>
-                <input asp-for="NomeCompleto" class="form-control" />
-                <span asp-validation-for="NomeCompleto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Empresa" class="control-label"></label>
-                <input asp-for="Empresa" class="form-control" />
-                <span asp-validation-for="Empresa" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cargo" class="control-label"></label>
-                <input asp-for="Cargo" class="form-control" />
-                <span asp-validation-for="Cargo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Especialidade" class="control-label"></label>
-                <input asp-for="Especialidade" class="form-control" />
-                <span asp-validation-for="Especialidade" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Biografia" class="control-label"></label>
-                <input asp-for="Biografia" class="form-control" />
-                <span asp-validation-for="Biografia" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Foto" class="control-label"></label>
-                <input asp-for="Foto" class="form-control" />
-                <span asp-validation-for="Foto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
 
-<div class="form-group">
-    <a asp-action="Index">Cancelar</a>
+            <div asp-validation-summary="ModelOnly"
+                 class="text-danger mb-3"></div>
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="row">
+
+                <div class="col-md-6 mb-4">
+
+                    <label asp-for="NomeCompleto"
+                           class="form-label-custom">
+                        Nome Completo
+                    </label>
+
+                    <input asp-for="NomeCompleto"
+                           class="form-control input-dark"
+                           placeholder="Digite o nome completo..." />
+
+                    <span asp-validation-for="NomeCompleto"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-4">
+
+                    <label asp-for="Empresa"
+                           class="form-label-custom">
+                        Empresa
+                    </label>
+
+                    <input asp-for="Empresa"
+                           class="form-control input-dark"
+                           placeholder="Empresa do palestrante..." />
+
+                    <span asp-validation-for="Empresa"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-4">
+
+                    <label asp-for="Cargo"
+                           class="form-label-custom">
+                        Cargo
+                    </label>
+
+                    <input asp-for="Cargo"
+                           class="form-control input-dark"
+                           placeholder="Cargo atual..." />
+
+                    <span asp-validation-for="Cargo"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-4">
+
+                    <label asp-for="Especialidade"
+                           class="form-label-custom">
+                        Especialidade
+                    </label>
+
+                    <input asp-for="Especialidade"
+                           class="form-control input-dark"
+                           placeholder="Área de especialidade..." />
+
+                    <span asp-validation-for="Especialidade"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="col-12 mb-4">
+
+                    <label asp-for="Biografia"
+                           class="form-label-custom">
+                        Biografia
+                    </label>
+
+                    <textarea asp-for="Biografia"
+                              rows="5"
+                              class="form-control input-dark"
+                              placeholder="Digite uma biografia..."></textarea>
+
+                    <span asp-validation-for="Biografia"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="col-12 mb-4">
+
+                    <label asp-for="Foto"
+                           class="form-label-custom">
+                        URL da Foto
+                    </label>
+
+                    <input asp-for="Foto"
+                           class="form-control input-dark"
+                           placeholder="Cole o link da foto..." />
+
+                    <span asp-validation-for="Foto"
+                          class="text-danger"></span>
+
+                </div>
+
+                @if (!string.IsNullOrEmpty(Model.Foto))
+                {
+                    <div class="col-12 mb-4">
+
+                        <img src="@Model.Foto"
+                             class="img-preview" />
+
+                    </div>
+                }
+
+            </div>
+
+            <div class="d-flex gap-3 flex-wrap">
+
+                <button type="submit" class="btn-tech">
+                    Salvar Alterações
+                </button>
+
+                <a asp-action="Index" class="btn-cancelar">
+                    Cancelar
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

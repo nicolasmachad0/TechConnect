@@ -206,3 +206,12 @@ h1, h2, h3, h4 {
         height: 180px;
     }
 }
+
+.img-preview {
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+    border-radius: 18px;
+    border: 1px solid #334155;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}

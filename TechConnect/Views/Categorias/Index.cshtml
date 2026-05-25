@@ -89,15 +89,30 @@
                                 }
 
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
         }
 
     </div>
+
+    <div id="nenhumaCategoria"
+     class="text-center mt-5"
+     style="display: none;">
+
+    <div class="alert alert-dark border border-secondary p-4">
+
+        <h4 class="fw-bold mb-3">
+            Ops... nenhuma categoria encontrada ou cadastrada!
+        </h4>
+
+        <p class="text-secondary mb-0">
+            Tente pesquisar outro nome ou crie uma nova categoria.
+        </p>
+
+    </div>
+
+</div>
 
 </div>
 
@@ -111,18 +126,39 @@
 
         let cards = document.querySelectorAll('.card-categoria');
 
+        let encontrou = false;
+
         cards.forEach(card => {
 
             let texto = card.innerText.toLowerCase();
 
             if (texto.includes(filtro)) {
+
                 card.style.display = '';
+
+                encontrou = true;
+
             }
             else {
+
                 card.style.display = 'none';
+
             }
 
         });
+
+        const mensagem = document.getElementById('nenhumaCategoria');
+
+        if (encontrou) {
+
+            mensagem.style.display = 'none';
+
+        }
+        else {
+
+            mensagem.style.display = 'block';
+
+        }
 
     });
 

@@ -1,58 +1,109 @@
 ﻿@model TechConnect.Models.Palestrante
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes";
 }
 
-<h1>Details</h1>
+<div class="container mt-4">
 
-<div>
-    <h4>Palestrante</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NomeCompleto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NomeCompleto)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Empresa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Empresa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cargo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cargo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Especialidade)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Especialidade)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Biografia)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Biografia)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Foto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Foto)
-        </dd>
-    </dl>
-</div>
-<div>
-    @if (User.Identity.Name == "admin@techconnect.com")
-    {
-        <a asp-action="Edit" asp-route-id="@Model?.Id">Editar</a>
-    }
-    |
-    <a asp-action="Index">Voltar</a>
+    <div class="card shadow-lg border-0">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between align-items-center flex-wrap mb-4">
+
+                <div>
+
+                    <h1 class="fw-bold text-primary">
+                        Detalhes do Palestrante
+                    </h1>
+
+                    <p class="text-secondary mb-0">
+                        Informações completas do palestrante
+                    </p>
+
+                </div>
+
+            </div>
+
+            <hr />
+
+            <div class="text-center mb-4">
+
+                <img src="@Model.Foto"
+                     class="img-fluid rounded shadow"
+                     style="max-height: 350px; object-fit: cover;" />
+
+            </div>
+
+            <dl class="row">
+
+                <dt class="col-sm-3 fw-bold text-primary">
+                    @Html.DisplayNameFor(model => model.NomeCompleto)
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.NomeCompleto)
+                </dd>
+
+                <dt class="col-sm-3 fw-bold text-primary">
+                    @Html.DisplayNameFor(model => model.Empresa)
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Empresa)
+                </dd>
+
+                <dt class="col-sm-3 fw-bold text-primary">
+                    @Html.DisplayNameFor(model => model.Cargo)
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Cargo)
+                </dd>
+
+                <dt class="col-sm-3 fw-bold text-primary">
+                    @Html.DisplayNameFor(model => model.Especialidade)
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Especialidade)
+                </dd>
+
+                <dt class="col-sm-3 fw-bold text-primary">
+                    @Html.DisplayNameFor(model => model.Biografia)
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Biografia)
+                </dd>
+
+            </dl>
+
+            <div class="mt-4 d-flex gap-3 flex-wrap">
+
+                @if (User.Identity.Name == "admin@techconnect.com")
+                {
+                    <a asp-action="Edit"
+                       asp-route-id="@Model?.Id"
+                       class="btn btn-warning">
+
+                        Editar
+
+                    </a>
+                }
+
+                <a asp-action="Index"
+                   class="btn btn-outline-light">
+
+                    Voltar
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
