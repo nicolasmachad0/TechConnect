@@ -57,6 +57,7 @@ TechConnect/
 │
 └── Program.cs
 ```
+---
 
 # 🔐 Sistema de Autenticação
 
@@ -64,7 +65,9 @@ O sistema utiliza o ASP.NET Identity para autenticação de usuários.
 
 Existem dois tipos de acesso:
 
+
 👤 Usuário comum
+
 
 Pode:
 
@@ -78,7 +81,10 @@ Não pode:
 Criar eventos
 Editar eventos
 Excluir informações
+
+
 👑 Administrador
+
 
 O administrador possui acesso total ao sistema.
 
@@ -90,7 +96,11 @@ Excluir eventos
 Gerenciar categorias
 Gerenciar palestrantes
 Gerenciar contatos
-🎯 Funcionalidades
+
+---
+
+# 🎯 Funcionalidades
+
 📌 Eventos
 Cadastro completo de eventos
 Upload de banner/imagem
@@ -99,11 +109,13 @@ Local do evento
 Descrição completa
 Relacionamento com categorias
 Relacionamento com palestrantes
+
 🧠 Categorias
 Cadastro de categorias
 Busca dinâmica
 Listagem moderna
 Associação aos eventos
+
 🎤 Palestrantes
 Cadastro de palestrantes
 Foto do palestrante
@@ -112,11 +124,15 @@ Cargo
 Especialidade
 Biografia
 Associação aos eventos
+
 📨 Contato
 Formulário de contato
 Gerenciamento de mensagens
 Área administrativa
-🔗 Relacionamentos N:N
+
+---
+
+# 🔗 Relacionamentos N:N
 
 O projeto utiliza relacionamentos muitos-para-muitos:
 
@@ -124,24 +140,27 @@ EventoCategoria
 
 Relaciona:
 
-Evento
-Categoria
-EventoPalestrante
+-Evento
+-Categoria
+-EventoPalestrante
 
 Relaciona:
 
-Evento
-Palestrante
-Tema da palestra
-📄 Página de Detalhes do Evento
+-Evento
+-Palestrante
+-Tema da palestra
+
+---
+
+# 📄 Página de Detalhes do Evento
 
 A página de detalhes exibe:
 
-✅ Nome do evento
-✅ Banner
-✅ Descrição completa
+✅Nome do evento
+✅Banner
+✅Descrição completa
 ✅ Data
-✅ Horário
+✅Horário
 ✅ Local
 ✅ Categorias
 ✅ Lista de palestrantes
@@ -149,86 +168,48 @@ A página de detalhes exibe:
 ✅ Tema da palestra
 ✅ Link para detalhes do palestrante
 
-🎨 Interface
+---
+
+# 🎨 Interface
 
 O sistema foi desenvolvido com foco em:
 
-Design moderno
-Tema dark
-Responsividade
-Melhor experiência visual
-Navegação intuitiva
-📱 Responsividade
+- Design moderno
+- Tema dark
+- Responsividade
+- Melhor experiência visual
+- Navegação intuitiva
+
+---
+
+# 📱 Responsividade
 
 O projeto é totalmente responsivo para:
 
-Desktop
-Tablets
-Smartphones
-⚙️ Como Executar o Projeto
-1️⃣ Clone o repositório
-git clone https://github.com/SEU-USUARIO/TechConnect.git
-2️⃣ Abra o projeto
+- Desktop
+- Tablets
+- Smartphones
 
-Abra no:
+---
 
-Visual Studio 2022
-3️⃣ Configure a conexão com o banco
-
-No arquivo:
-
-appsettings.json
-
-Configure sua string de conexão SQL Server.
-
-4️⃣ Execute as migrations
-
-Abra o Package Manager Console:
-
-Update-Database
-5️⃣ Execute o projeto
-
-Pressione:
-
-F5
-
-ou:
-
-Ctrl + F5
-🗃️ Banco de Dados
-
-O sistema utiliza:
-
-SQL Server
-Entity Framework Core Code First
-👨‍💻 Autor
+# 👨‍💻 Autor
 
 Desenvolvido por:
 
 Nicolas Machado Fogaça
+Larissa Vitoria Mota Rocha
+Kauan Campos
 
 Projeto acadêmico desenvolvido para prática de:
 
-ASP.NET Core MVC
-Entity Framework
-Relacionamentos N:N
-Identity
-CRUD completo
-Responsividade
-Front-end moderno
-📌 Status do Projeto
+- ASP.NET Core MVC
+- Entity Framework
+- Relacionamentos N:N
+- Identity
+- CRUD completo
+- Responsividade
+- Front-end moderno
 
-✅ Em desenvolvimento ativo
-✅ Funcional
-✅ Estrutura MVC completa
-✅ Banco integrado
-✅ Interface moderna
+---
+---
 
-⭐ Futuras Melhorias
-Upload real de imagens
-Dashboard administrativo
-Sistema de inscrições
-Área do participante
-Pesquisa avançada
-API REST
-Deploy online
