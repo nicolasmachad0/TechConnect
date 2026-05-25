@@ -1,81 +1,182 @@
 ﻿@model TechConnect.Models.Evento
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes do Evento";
 }
 
-<h1>Details</h1>
+<div class="container mt-4">
 
-<div class="card p-4 shadow-lg border-0">
+    <div class="card shadow border-0 overflow-hidden">
 
-    <img src="@Model.Imagem"
-         class="img-fluid rounded shadow mb-4"
-         style="max-height:400px;
-                width:100%;
-                object-fit:cover;" />
+        <img src="@Model.Imagem"
+             class="img-fluid"
+             style="width:100%;
+                    max-height:450px;
+                    object-fit:cover;" />
 
-    <h1 class="mb-3 fw-bold">
-        @Model.Nome
-    </h1>
+        <div class="card-body p-4">
 
-    <p class="mb-4 text-secondary">
-        @Model.Descricao
-    </p>
+            <h1 class="fw-bold mb-3">
+                @Model.Nome
+            </h1>
 
-    <div class="mb-2">
-        <strong>📅 Data:</strong>
-        @Model.Data.ToShortDateString()
+            <p class="text-secondary fs-5">
+                @Model.Descricao
+            </p>
+
+            <hr class="my-4" />
+
+            <div class="row">
+
+                <div class="col-md-4 mb-3">
+
+                    <h5 class="text-primary fw-bold">
+                        Data
+                    </h5>
+
+                    <p>
+                        @Model.Data.ToShortDateString()
+                    </p>
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <h5 class="text-primary fw-bold">
+                        Horário
+                    </h5>
+
+                    <p>
+                        @Model.Horario
+                    </p>
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <h5 class="text-primary fw-bold">
+                        Local
+                    </h5>
+
+                    <p>
+                        @Model.Local
+                    </p>
+
+                </div>
+
+            </div>
+
+            <hr class="my-4" />
+
+            <h4 class="fw-bold mb-3">
+                Categorias
+            </h4>
+
+            <div class="d-flex flex-wrap gap-2 mb-4">
+
+                @foreach (var categoria in Model.EventoCategorias)
+                {
+                    <span class="badge bg-primary p-2 fs-6">
+                        @categoria.Categoria.Nome
+                    </span>
+                }
+
+            </div>
+
+            <hr class="my-4" />
+
+            <h3 class="fw-bold mb-4">
+                Palestrantes
+            </h3>
+
+            <div class="row">
+
+                @foreach (var item in Model.EventoPalestrantes)
+                {
+                    <div class="col-md-6 mb-4">
+
+                        <div class="card h-100 shadow border-0">
+
+                            <img src="@item.Palestrante.Foto"
+                                 class="card-img-top"
+                                 style="height:250px;
+                                        object-fit:cover;" />
+
+                            <div class="card-body">
+
+                                <h4 class="fw-bold">
+                                    @item.Palestrante.NomeCompleto
+                                </h4>
+
+                                <p class="text-primary fw-bold">
+                                    @item.Palestrante.Empresa
+                                </p>
+
+                                <p>
+                                    <strong>Cargo:</strong>
+                                    @item.Palestrante.Cargo
+                                </p>
+
+                                <p>
+                                    <strong>Especialidade:</strong>
+                                    @item.Palestrante.Especialidade
+                                </p>
+
+                                <p>
+                                    <strong>Tema da palestra:</strong>
+                                    @item.Tema
+                                </p>
+
+                                <p class="text-secondary">
+                                    @item.Palestrante.Biografia
+                                </p>
+
+                            </div>
+
+                            <div class="card-footer bg-transparent border-0">
+
+                                <a asp-controller="Palestrantes"
+                                   asp-action="Details"
+                                   asp-route-id="@item.Palestrante.Id"
+                                   class="btn btn-primary w-100">
+
+                                    Ver Perfil Completo
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+
+            <div class="d-flex gap-2 mt-4 flex-wrap">
+
+                @if (User.Identity.Name == "admin@techconnect.com")
+                {
+                    <a asp-action="Edit"
+                       asp-route-id="@Model.Id"
+                       class="btn btn-warning">
+
+                        Editar Evento
+
+                    </a>
+                }
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    Voltar
+
+                </a>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="mb-2">
-        <strong>⏰ Horário:</strong>
-        @Model.Horario
-    </div>
-
-    <div class="mb-4">
-        <strong>📍 Local:</strong>
-        @Model.Local
-    </div>
-
-    <hr />
-
-    <h5 class="mb-3">Categorias</h5>
-
-    @foreach (var categoria in Model.EventoCategorias)
-    {
-        <span class="badge bg-primary me-2 mb-2 p-2">
-            @categoria.Categoria?.Nome
-        </span>
-    }
-
-    <hr />
-
-    <h5 class="mb-3">Palestrantes</h5>
-
-    @foreach (var palestrante in Model.EventoPalestrantes)
-    {
-        <span class="badge bg-info text-dark me-2 mb-2 p-2">
-            @palestrante.Palestrante?.NomeCompleto
-        </span>
-    }
-
-    <div class="mt-4 d-flex gap-2 flex-wrap">
-
-        @if (User.Identity.Name == "admin@techconnect.com")
-        {
-            <a asp-action="Edit"
-               asp-route-id="@Model?.Id"
-               class="btn btn-primary">
-
-                Editar
-
-            </a>
-        }
-
-        <a asp-action="Index"
-           class="btn-voltar">
-            Voltar
-        </a>
-
-    </div>
 </div>
