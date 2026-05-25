@@ -87,7 +87,7 @@
                                 Detalhes
                             </a>
 
-                            @if (User.Identity.IsAuthenticated)
+                            @if (User.Identity.Name == "admin@techconnect.com")
                                 {
                                     <a asp-action="Edit"
                                        asp-route-id="@item.Id"
