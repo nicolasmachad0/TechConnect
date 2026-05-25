@@ -58,66 +58,54 @@
                     <input asp-for="Local" class="form-control" />
                 </div>
 
-                       <div class="form-group mb-4">
-                <label class="control-label" style="color: #7fd4ff; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 12px;">Categorias</label>
-                <div class="row">
-                    @if (ViewBag.Categorias != null)
-                    {
-                        @foreach (var categoria in ViewBag.Categorias as List<TechConnect.Models.Categoria>)
-                        {
-                            <div class="col-md-6 mb-2">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="CategoriasIds" value="@categoria.Id" id="cat@(categoria.Id)" style="border-color: #7fd4ff;">
-                                    <label class="form-check-label" for="cat@(categoria.Id)" style="color: #e0e0e0;">
-                                        @categoria.Nome
-                                    </label>
-                                </div>
-                            </div>
-                        }
-                    }
-                    else
-                    {
-                        <p style="color: #888;">Nenhuma categoria cadastrada. <a asp-controller="Categorias" asp-action="Create" style="color: #7fd4ff;">Criar categoria</a></p>
-                    }
+                <div class="form-group">
+                    <label asp-for="Imagem" class="control-label"></label>
+                    <input asp-for="Imagem" class="form-control" />
+                    <span asp-validation-for="Imagem" class="text-danger"></span>
                 </div>
-            </div>
 
-            <hr style="border-color: #7fd4ff; opacity: 0.3; margin: 30px 0;">
+                <hr class="my-4" />
 
-            <!-- PALESTRANTES -->
-            <div class="form-group mb-4">
-                <label class="control-label" style="color: #7fd4ff; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 12px;">Palestrantes</label>
-                <small style="color: #888; display: block; margin-bottom: 10px;">Marque os palestrantes e informe o tema de cada um</small>
+                <h5 class="mb-3">Categorias</h5>
 
-                @if (ViewBag.Palestrantes != null)
+                @foreach (var categoria in ViewBag.Categorias)
                 {
-                    var palestrantes = ViewBag.Palestrantes as List<TechConnect.Models.Palestrante>;
-                    for (int i = 0; i < palestrantes.Count; i++)
-                    {
-                        var palestrante = palestrantes[i];
-                        <div class="mb-3 p-3" style="background: rgba(127, 212, 255, 0.05); border-left: 3px solid #7fd4ff; border-radius: 4px;">
-                            <div class="form-check mb-2">
-                                <input class="form-check-input palestrante-checkbox" type="checkbox" name="PalestrantesIds" value="@palestrante.Id" id="pal@(palestrante.Id)" data-index="@i" style="border-color: #7fd4ff;">
-                                <label class="form-check-label" for="pal@(palestrante.Id)" style="color: #e0e0e0; font-weight: 600;">
-                                    @palestrante.NomeCompleto
-                                </label>
-                            </div>
-                            <small style="color: #888; margin-left: 25px; display: block; margin-bottom: 8px;">
-                                @palestrante.Empresa - @palestrante.Especialidade
-                            </small>
-                            <input type="text" name="Temas" class="form-control tema-input" placeholder="Tema da palestra..." id="tema@(i)" disabled style="margin-left: 25px; max-width: 500px;" />
-                        </div>
-                    }
+                    <div class="form-check mb-2">
+
+                        <input class="form-check-input"
+                               type="checkbox"
+                               name="CategoriasSelecionadas"
+                               value="@categoria.Id" />
+
+                        <label class="form-check-label">
+                            @categoria.Nome
+                        </label>
+
+                    </div>
                 }
-                else
+
+                <hr class="my-4" />
+
+                <h5 class="mb-3">Palestrantes</h5>
+
+                @foreach (var palestrante in ViewBag.Palestrantes)
                 {
-                    <p style="color: #888;">Nenhum palestrante cadastrado. <a asp-controller="Palestrantes" asp-action="Create" style="color: #7fd4ff;">Criar palestrante</a></p>
+                    <div class="form-check mb-2">
+
+                        <input class="form-check-input"
+                               type="checkbox"
+                               name="PalestrantesSelecionados"
+                               value="@palestrante.Id" />
+
+                        <label class="form-check-label">
+                            @palestrante.NomeCompleto
+                        </label>
+
+                    </div>
                 }
-            </div>
 
                 <div class="mb-4">
                     <label asp-for="Imagem" class="form-label"></label>
-
                     <input asp-for="Imagem"
                            class="form-control"
                            placeholder="Cole a URL do banner aqui" />

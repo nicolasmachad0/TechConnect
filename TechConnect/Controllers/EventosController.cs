@@ -48,6 +48,9 @@ namespace TechConnect.Controllers
         // GET: Eventos/Create
         public IActionResult Create()
         {
+            ViewBag.Categorias = _context.Categoria.ToList();
+            ViewBag.Palestrantes = _context.Palestrante.ToList();
+
             return View();
         }
 
@@ -56,14 +59,48 @@ namespace TechConnect.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Descricao,Data,Horario,Local,Imagem")] Evento evento)
+        public async Task<IActionResult> Create(
+    Evento evento,
+    List<int> CategoriasSelecionadas,
+    List<int> PalestrantesSelecionados)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(evento);
                 await _context.SaveChangesAsync();
+
+                // Categorias
+                foreach (var categoriaId in CategoriasSelecionadas)
+                {
+                    EventoCategoria ec = new EventoCategoria
+                    {
+                        EventoId = evento.Id,
+                        CategoriaId = categoriaId
+                    };
+
+                    _context.EventoCategoria.Add(ec);
+                }
+
+                // Palestrantes
+                foreach (var palestranteId in PalestrantesSelecionados)
+                {
+                    EventoPalestrante ep = new EventoPalestrante
+                    {
+                        EventoId = evento.Id,
+                        PalestranteId = palestranteId
+                    };
+
+                    _context.EventoPalestrante.Add(ep);
+                }
+
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.Categorias = _context.Categoria.ToList();
+            ViewBag.Palestrantes = _context.Palestrante.ToList();
+
             return View(evento);
         }
 
