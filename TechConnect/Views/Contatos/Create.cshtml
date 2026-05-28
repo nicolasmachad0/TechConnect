@@ -25,9 +25,7 @@
 
                 <div class="mb-3">
                     <label asp-for="Email" class="form-label"></label>
-                    <input asp-for="Email"
-                           type="email"
-                           class="form-control" />
+                    <input asp-for="Email" type="email" class="form-control" />
                 </div>
 
                 <div class="mb-3">
@@ -36,35 +34,20 @@
                 </div>
 
                 <div class="mb-3">
-
                     <label asp-for="Mensagem" class="form-label"></label>
-
-                    <textarea asp-for="Mensagem"
-                              class="form-control"
-                              rows="6"></textarea>
-
+                    <textarea asp-for="Mensagem" class="form-control" rows="6"></textarea>             
                 </div>
 
                 <div class="mb-4">
 
                     <label asp-for="DataEnvio" class="form-label"></label>
-
-                    <input asp-for="DataEnvio"
-                           type="date"
-                           class="form-control" />
-
+                    <input asp-for="DataEnvio" type="date" class="form-control" />
                 </div>
 
                 <div class="d-flex gap-2">
 
-                    <button type="submit" class="btn btn-success">
-                        Enviar Contato
-                    </button>
-
-                    <a asp-action="Index" class="btn btn-secondary">
-                        Cancelar
-                    </a>
-
+                    <button type="submit" class="btn btn-success">Enviar Contato</button>
+                    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
                 </div>
 
             </form>

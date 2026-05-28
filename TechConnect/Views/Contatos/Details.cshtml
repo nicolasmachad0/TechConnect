@@ -26,63 +26,28 @@
             <div class="row g-4">
 
                 <div class="col-md-6">
-
-                    <label class="form-label text-secondary">
-                        Nome
-                    </label>
-
-                    <div class="form-control bg-dark text-white border-secondary">
-                        @Model.Nome
-                    </div>
-
+                    <label class="form-label text-secondary">Nome</label>
+                    <div class="form-control bg-dark text-white border-secondary">@Model.Nome</div>
                 </div>
 
                 <div class="col-md-6">
-
-                    <label class="form-label text-secondary">
-                        Email
-                    </label>
-
-                    <div class="form-control bg-dark text-white border-secondary">
-                        @Model.Email
-                    </div>
-
+                    <label class="form-label text-secondary">Email</label>
+                    <div class="form-control bg-dark text-white border-secondary">@Model.Email</div>
                 </div>
 
                 <div class="col-md-6">
-
-                    <label class="form-label text-secondary">
-                        Assunto
-                    </label>
-
-                    <div class="form-control bg-dark text-white border-secondary">
-                        @Model.Assunto
-                    </div>
-
+                    <label class="form-label text-secondary">Assunto </label>
+                    <div class="form-control bg-dark text-white border-secondary">@Model.Assunto</div>
                 </div>
 
                 <div class="col-md-6">
-
-                    <label class="form-label text-secondary">
-                        Data de Envio
-                    </label>
-
-                    <div class="form-control bg-dark text-white border-secondary">
-                        @Model.DataEnvio.ToString("dd/MM/yyyy")
-                    </div>
-
+                    <label class="form-label text-secondary">Data de Envio</label>
+                    <div class="form-control bg-dark text-white border-secondary">@Model.DataEnvio.ToString("dd/MM/yyyy") </div>
                 </div>
 
                 <div class="col-12">
-
-                    <label class="form-label text-secondary">
-                        Mensagem
-                    </label>
-
-                    <textarea class="form-control bg-dark text-white border-secondary"
-                              rows="6"
-                              readonly>@Model.Mensagem</textarea>
-
+                    <label class="form-label text-secondary">Mensagem </label>
+                    <textarea class="form-control bg-dark text-white border-secondary" rows="6" readonly>@Model.Mensagem</textarea>
                 </div>
 
             </div>
@@ -91,21 +56,10 @@
 
                 @if (User.Identity.Name == "admin@techconnect.com")
                 {
-                    <a asp-action="Edit"
-                       asp-route-id="@Model.Id"
-                       class="btn btn-warning">
-
-                        Editar
-
-                    </a>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
                 }
 
-                <a asp-action="Index"
-                   class="btn btn-outline-light">
-
-                    Voltar
-
-                </a>
+                <a asp-action="Index" class="btn btn-outline-light">Voltar</a>
 
             </div>
 
