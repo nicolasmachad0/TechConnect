@@ -60,9 +60,14 @@ namespace TechConnect.Controllers
             {
                 _context.Add(contato);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ContatoEnviado));
             }
             return View(contato);
+        }
+
+        public IActionResult ContatoEnviado()
+        {
+            return View();
         }
 
         // GET: Contatos/Edit/5

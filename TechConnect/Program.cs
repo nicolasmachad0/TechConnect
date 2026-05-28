@@ -42,53 +42,16 @@ app.MapControllerRoute(
 app.MapRazorPages(); // necess�rio para as p�ginas de login do Identity
 
 // Seed do usu�rio admin (com migra��o e tratamento de erros)
+// Aplicar migrations e executar seed
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    var logger = services.GetRequiredService<ILogger<Program>>();
 
-    try
-    {
-        var context = services.GetRequiredService<ApplicationDbContext>();
-        // Aplica migra��es pendentes (cria banco se necess�rio)
-        await context.Database.MigrateAsync();
+    var context = services.GetRequiredService<ApplicationDbContext>();
 
-        var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
-        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    await context.Database.MigrateAsync();
 
-        // Cria a role Admin se n�o existir
-        if (!await roleManager.RoleExistsAsync("Admin"))
-        {
-            await roleManager.CreateAsync(new IdentityRole("Admin"));
-        }
-
-        string email = "admin@techconnect.com";
-        string senha = "Admin123@";
-
-        if (await userManager.FindByEmailAsync(email) == null)
-        {
-            var admin = new IdentityUser
-            {
-                UserName = email,
-                Email = email,
-                EmailConfirmed = true
-            };
-            await userManager.CreateAsync(admin, senha);
-        }
-
-        // Atribui a role Admin ao usu�rio (verifica null)
-        var adminUser = await userManager.FindByEmailAsync(email);
-        if (adminUser != null && !await userManager.IsInRoleAsync(adminUser, "Admin"))
-        {
-            await userManager.AddToRoleAsync(adminUser, "Admin");
-        }
-    }
-    catch (Exception ex)
-    {
-        logger.LogError(ex, "Erro ao aplicar migra��es / seed do usu�rio admin.");
-        // opcional: rethrow se quiser que a aplica��o falhe ao iniciar
-        // throw;
-    }
+    await DbInitializer.SeedRolesAndAdminAsync(services);
 }
 
 app.Run();
