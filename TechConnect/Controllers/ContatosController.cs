@@ -22,7 +22,11 @@ namespace TechConnect.Controllers
         // GET: Contatos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Contato.ToListAsync());
+            var contatos = await _context.Contato
+                .OrderByDescending(c => c.DataEnvio)
+                .ToListAsync();
+
+            return View(contatos);
         }
 
         // GET: Contatos/Details/5
@@ -54,14 +58,18 @@ namespace TechConnect.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Assunto,Mensagem,DataEnvio")] Contato contato)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Assunto,Mensagem")] Contato contato)
         {
             if (ModelState.IsValid)
             {
+                contato.DataEnvio = DateTime.Now;
+
                 _context.Add(contato);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(ContatoEnviado));
             }
+
             return View(contato);
         }
 

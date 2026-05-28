@@ -84,21 +84,10 @@
 
                 @if (User.Identity.Name == "admin@techconnect.com")
                 {
-                    <a asp-action="Edit"
-                       asp-route-id="@Model?.Id"
-                       class="btn btn-warning">
-
-                        Editar
-
-                    </a>
+                    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Editar </a>           
                 }
 
-                <a asp-action="Index"
-                   class="btn btn-outline-light">
-
-                    Voltar
-
-                </a>
+                <a asp-action="Index" class="btn btn-outline-light">Voltar</a>
 
             </div>
 
