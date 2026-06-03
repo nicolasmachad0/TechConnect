@@ -4,10 +4,13 @@
     ViewData["Title"] = "Editar Palestrante";
 }
 
+<!-- Container principal da página -->
 <div class="container py-5">
 
+    <!-- Card do formulário de edição -->
     <div class="card-dark-form mx-auto" style="max-width: 900px;">
 
+        <!-- Cabeçalho da página -->
         <div class="mb-4">
             <h1 class="titulo-form">Editar Palestrante</h1>
 
@@ -16,13 +19,16 @@
             </p>
         </div>
 
+        <!-- Formulário de edição -->
         <form asp-action="Edit">
 
+            <!-- Exibição de erros de validação -->
             <div asp-validation-summary="ModelOnly"
                  class="text-danger mb-3"></div>
 
             <input type="hidden" asp-for="Id" />
 
+            <!-- Informações do palestrante -->
             <div class="row">
 
                 <div class="col-md-6 mb-4">
@@ -32,91 +38,53 @@
                         Nome Completo
                     </label>
 
-                    <input asp-for="NomeCompleto"
-                           class="form-control input-dark"
-                           placeholder="Digite o nome completo..." />
+                    <input asp-for="NomeCompleto" class="form-control input-dark" placeholder="Digite o nome completo..." />
+                    <span asp-validation-for="NomeCompleto" class="text-danger"></span>
 
-                    <span asp-validation-for="NomeCompleto"
-                          class="text-danger"></span>
                 </div>
 
                 <div class="col-md-6 mb-4">
 
-                    <label asp-for="Empresa"
-                           class="form-label-custom">
-                        Empresa
-                    </label>
+                    <label asp-for="Empresa" class="form-label-custom">Empresa</label>
+                    <input asp-for="Empresa" class="form-control input-dark" placeholder="Empresa do palestrante..." />
+                    <span asp-validation-for="Empresa" class="text-danger"></span>
 
-                    <input asp-for="Empresa"
-                           class="form-control input-dark"
-                           placeholder="Empresa do palestrante..." />
-
-                    <span asp-validation-for="Empresa"
-                          class="text-danger"></span>
                 </div>
 
                 <div class="col-md-6 mb-4">
 
-                    <label asp-for="Cargo"
-                           class="form-label-custom">
-                        Cargo
-                    </label>
+                    <label asp-for="Cargo" class="form-label-custom">Cargo</label>
+                    <input asp-for="Cargo" class="form-control input-dark" placeholder="Cargo atual..." />
+                    <span asp-validation-for="Cargo" class="text-danger"></span>
 
-                    <input asp-for="Cargo"
-                           class="form-control input-dark"
-                           placeholder="Cargo atual..." />
-
-                    <span asp-validation-for="Cargo"
-                          class="text-danger"></span>
                 </div>
 
                 <div class="col-md-6 mb-4">
 
-                    <label asp-for="Especialidade"
-                           class="form-label-custom">
-                        Especialidade
-                    </label>
+                    <label asp-for="Especialidade" class="form-label-custom">Especialidade</label>
+                    <input asp-for="Especialidade" class="form-control input-dark" placeholder="Área de especialidade..." />
+                    <span asp-validation-for="Especialidade" class="text-danger"></span>
 
-                    <input asp-for="Especialidade"
-                           class="form-control input-dark"
-                           placeholder="Área de especialidade..." />
-
-                    <span asp-validation-for="Especialidade"
-                          class="text-danger"></span>
                 </div>
 
                 <div class="col-12 mb-4">
 
-                    <label asp-for="Biografia"
-                           class="form-label-custom">
-                        Biografia
-                    </label>
+                    <label asp-for="Biografia" class="form-label-custom">Biografia</label>
+                    <textarea asp-for="Biografia" rows="5" class="form-control input-dark" placeholder="Digite uma biografia..."></textarea>
+                    <span asp-validation-for="Biografia" class="text-danger"></span>
 
-                    <textarea asp-for="Biografia"
-                              rows="5"
-                              class="form-control input-dark"
-                              placeholder="Digite uma biografia..."></textarea>
-
-                    <span asp-validation-for="Biografia"
-                          class="text-danger"></span>
                 </div>
 
+                <!-- Campo da foto do palestrante -->
                 <div class="col-12 mb-4">
 
-                    <label asp-for="Foto"
-                           class="form-label-custom">
-                        URL da Foto
-                    </label>
-
-                    <input asp-for="Foto"
-                           class="form-control input-dark"
-                           placeholder="Cole o link da foto..." />
-
-                    <span asp-validation-for="Foto"
-                          class="text-danger"></span>
+                    <label asp-for="Foto" class="form-label-custom">URL da Foto</label>
+                    <input asp-for="Foto" class="form-control input-dark" placeholder="Cole o link da foto..." />
+                    <span asp-validation-for="Foto" class="text-danger"></span>
 
                 </div>
 
+                <!-- Pré-visualização da foto -->
                 @if (!string.IsNullOrEmpty(Model.Foto))
                 {
                     <div class="col-12 mb-4">
@@ -129,6 +97,7 @@
 
             </div>
 
+            <!-- Botões de ação -->
             <div class="d-flex gap-3 flex-wrap">
 
                 <button type="submit" class="btn-tech">
@@ -147,6 +116,7 @@
 
 </div>
 
+<!-- Scripts de validação -->
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

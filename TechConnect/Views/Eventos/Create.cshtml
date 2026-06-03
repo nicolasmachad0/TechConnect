@@ -4,20 +4,26 @@
     ViewData["Title"] = "Novo Evento";
 }
 
+<!-- Container principal da página -->
 <div class="container mt-4">
 
+    <!-- Card do formulário -->
     <div class="card shadow border-0">
 
+        <!-- Cabeçalho da página -->
         <div class="card-header bg-primary text-white">
             <h3>Novo Evento</h3>
         </div>
 
         <div class="card-body">
 
+            <!-- Formulário de cadastro do evento -->
             <form asp-action="Create">
 
+                <!-- Exibição de erros de validação -->
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+                <!-- Informações principais do evento -->
                 <div class="mb-3">
                     <label asp-for="Nome" class="form-label"></label>
                     <input asp-for="Nome" class="form-control" />
@@ -25,87 +31,66 @@
 
                 <div class="mb-3">
                     <label asp-for="Descricao" class="form-label"></label>
-
-                    <textarea asp-for="Descricao"
-                              class="form-control"
-                              rows="5"></textarea>
+                    <textarea asp-for="Descricao" class="form-control" rows="5"></textarea>
                 </div>
 
+                <!-- Data e horário do evento -->
                 <div class="row">
 
                     <div class="col-md-6 mb-3">
                         <label asp-for="Data" class="form-label"></label>
-
-                        <input asp-for="Data"
-                               type="date"
-                               class="form-control" />
+                        <input asp-for="Data" type="date" class="form-control" />
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label asp-for="Horario" class="form-label"></label>
-
-                        <input asp-for="Horario"
-                               type="time"
-                               class="form-control" />
+                        <input asp-for="Horario" type="time" class="form-control" />
                     </div>
-
-            
 
                 </div>
 
+                <!-- Local do evento -->
                 <div class="mb-3">
                     <label asp-for="Local" class="form-label"></label>
                     <input asp-for="Local" class="form-control" />
                 </div>
 
-
                 <hr class="my-4" />
 
+                <!-- Seleção de categorias -->
                 <h5 class="mb-3">Categorias</h5>
 
                 @foreach (var categoria in ViewBag.Categorias)
                 {
                     <div class="form-check mb-2">
-
-                        <input class="form-check-input"
-                               type="checkbox"
-                               name="CategoriasSelecionadas"
-                               value="@categoria.Id" />
-
-                        <label class="form-check-label">
-                            @categoria.Nome
-                        </label>
-
+                        <input class="form-check-input" type="checkbox" name="CategoriasSelecionadas" value="@categoria.Id" />
+                        <label class="form-check-label">@categoria.Nome</label>
                     </div>
                 }
 
                 <hr class="my-4" />
 
+                <!-- Seleção de palestrantes -->
                 <h5 class="mb-3">Palestrantes</h5>
 
                 @foreach (var palestrante in ViewBag.Palestrantes)
                 {
                     <div class="form-check mb-2">
 
-                        <input class="form-check-input"
-                               type="checkbox"
-                               name="PalestrantesSelecionados"
-                               value="@palestrante.Id" />
+                        <input class="form-check-input" type="checkbox" name="PalestrantesSelecionados" value="@palestrante.Id" />
 
-                        <label class="form-check-label">
-                            @palestrante.NomeCompleto
-                        </label>
+                        <label class="form-check-label">@palestrante.NomeCompleto</label>
 
                     </div>
                 }
 
+                <!-- Campo para imagem do evento -->
                 <div class="mb-4">
                     <label asp-for="Imagem" class="form-label"></label>
-                    <input asp-for="Imagem"
-                           class="form-control"
-                           placeholder="Cole a URL do banner aqui" />
+                    <input asp-for="Imagem" class="form-control" placeholder="Cole a URL do banner aqui" />
                 </div>
 
+                <!-- Botões de ação -->
                 <div class="d-flex gap-2">
 
                     <button type="submit" class="btn btn-success">
@@ -118,32 +103,35 @@
 
                 </div>
 
-
             </form>
 
         </div>
 
     </div>
 
-
 </div>
 
+<!-- Scripts de validação e comportamento da página -->
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 
     <script>
+
+        // Controle de habilitação dos campos relacionados aos palestrantes
         document.querySelectorAll('.palestrante-checkbox').forEach(checkbox => {
             checkbox.addEventListener('change', function() {
                 const index = this.getAttribute('data-index');
                 const temaInput = document.getElementById('tema' + index);
+
                 temaInput.disabled = !this.checked;
+
                 if (!this.checked) {
                     temaInput.value = '';
                 }
             });
         });
+
     </script>
 }
-

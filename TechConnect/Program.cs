@@ -5,6 +5,7 @@ using TechConnect.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configuração da conexão com o banco de dados SQL Server
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")
@@ -12,6 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         sqlOptions => sqlOptions.EnableRetryOnFailure() // resili�ncia para falhas transit�rias
     ));
 
+// Configuração da autenticação e gerenciamento de usuários
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
@@ -19,6 +21,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 .AddRoles<IdentityRole>()
 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+// Registro dos Controllers e Views da aplicação
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -39,10 +42,10 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapRazorPages(); // necess�rio para as p�ginas de login do Identity
+// Mapeamento das páginas do Identity (Login, Registro, etc.)
+app.MapRazorPages();
 
-// Seed do usu�rio admin (com migra��o e tratamento de erros)
-// Aplicar migrations e executar seed
+// Aplicação automática das migrations e criação do usuário administrador
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;

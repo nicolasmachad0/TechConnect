@@ -4,31 +4,42 @@
     ViewData["Title"] = "Create";
 }
 
+<!-- Título da página -->
 <h1>Create</h1>
 
 <h4>Categoria</h4>
 <hr />
+
+<!-- Formulário de cadastro da categoria -->
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
+
+            <!-- Exibição de erros de validação -->
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Campo Nome -->
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
                 <input asp-for="Nome" class="form-control" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
-
             </div>
+
+            <!-- Botão para salvar a categoria -->
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+
         </form>
     </div>
 </div>
 
+<!-- Link para retornar à listagem -->
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
+<!-- Scripts de validação do formulário -->
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

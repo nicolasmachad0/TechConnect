@@ -4,6 +4,7 @@
     ViewData["Title"] = "TechConnect";
 }
 
+<!-- Seção principal de apresentação da plataforma -->
 <div class="container-fluid p-0">
 
     <div class="bg-dark text-white text-center py-5 mb-5">
@@ -19,6 +20,7 @@
                 inovação e desenvolvimento do Brasil.
             </p>
 
+            <!-- Botão para acessar a página de eventos -->
             <a href="/Eventos"
                class="btn btn-primary btn-lg px-5">
                 Explorar Eventos
@@ -30,6 +32,7 @@
 
 </div>
 
+<!-- Seção de eventos em destaque -->
 <div class="container">
 
     <div class="text-center mb-5">
@@ -44,14 +47,17 @@
 
     </div>
 
+    <!-- Listagem de eventos -->
     <div class="row">
 
         @foreach (var item in Model)
         {
+            <!-- Card do evento -->
             <div class="col-md-4 mb-4">
 
                 <div class="card shadow border-0 h-100">
 
+                    <!-- Imagem de capa do evento -->
                     @if (!string.IsNullOrEmpty(item.Imagem))
                     {
                         <img src="@item.Imagem"
@@ -66,6 +72,7 @@
 
                     <div class="card-body">
 
+                        <!-- Informações principais do evento -->
                         <h4 class="fw-bold">
                             @item.Nome
                         </h4>
@@ -88,6 +95,8 @@
                             <strong>Local:</strong>
                             @item.Local
                         </p>
+
+                        <!-- Categorias do evento -->
                         <p>
                             <strong>Categorias:</strong>
 
@@ -99,6 +108,7 @@
                             }
                         </p>
 
+                        <!-- Palestrantes do evento -->
                         <p>
                             <strong>Palestrantes:</strong>
 
@@ -110,6 +120,7 @@
                             }
                         </p>
 
+                        <!-- Botão para visualizar os detalhes do evento -->
                         <a href="/Eventos/Details/@item.Id" class="btn btn-primary w-100">
                             Ver Evento
                         </a>

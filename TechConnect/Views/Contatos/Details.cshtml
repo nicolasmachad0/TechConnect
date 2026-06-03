@@ -4,12 +4,15 @@
     ViewData["Title"] = "Detalhes do Contato";
 }
 
+<!-- Container principal da página -->
 <div class="container mt-4">
 
+    <!-- Card com as informações do contato -->
     <div class="card shadow-lg border-0">
 
         <div class="card-body p-4">
 
+            <!-- Cabeçalho da página -->
             <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
                 <div>
                     <h1 class="fw-bold text-primary mb-1">
@@ -23,6 +26,7 @@
 
             <hr class="mb-4" />
 
+            <!-- Exibição dos dados do contato -->
             <div class="row g-4">
 
                 <div class="col-md-6">
@@ -52,6 +56,7 @@
 
             </div>
 
+            <!-- Botões de ação -->
             <div class="mt-5 d-flex gap-3 flex-wrap">
 
                 @if (User.Identity.Name == "admin@techconnect.com")

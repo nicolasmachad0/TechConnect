@@ -4,8 +4,10 @@
     ViewData["Title"] = "Eventos";
 }
 
+<!-- Container principal da página -->
 <div class="container mt-4">
 
+    <!-- Cabeçalho da página -->
     <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
 
         <div>
@@ -15,6 +17,7 @@
             </p>
         </div>
 
+        <!-- Botão de cadastro disponível apenas para administradores -->
         <div>
              @if (User.Identity.Name == "admin@techconnect.com")
                 {
@@ -24,6 +27,7 @@
                 }
         </div>
 
+    <!-- Campo de busca dos eventos -->
     </div>
 
     <div class="mb-4">
@@ -33,11 +37,13 @@
                placeholder="Buscar evento por nome, local ou descrição..." />
     </div>
 
+     <!-- Listagem de eventos -->
     <div class="row" id="listaEventos">
 
         @foreach (var item in Model)
         {
-            <div class="col-md-4 mb-4 card-evento">
+
+            <div class="col-md-4 mb-4 card-evento"> 
 
                 <div class="card shadow border-0 h-100">
 

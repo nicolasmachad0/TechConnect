@@ -4,8 +4,11 @@
     ViewData["Title"] = "Palestrantes";
 }
 
+<!-- Container principal da página -->
+
 <div class="container mt-4">
 
+    <!-- Cabeçalho da página -->
     <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
 
         <div>
@@ -25,14 +28,12 @@
         </div>
 
     </div>
-
+    <!-- Campo de busca dos palestrantes -->
     <div class="mb-4">
-        <input type="text"
-               id="buscarPalestrante"
-               class="form-control"
-               placeholder="Buscar palestrante por nome, empresa ou especialidade..." />
+        <input type="text" id="buscarPalestrante" class="form-control" placeholder="Buscar palestrante por nome, empresa ou especialidade..." />     
+              
     </div>
-
+    <!-- Listagem de palestrantes -->
     <div class="row" id="listaPalestrantes">
 
         @foreach (var item in Model)
@@ -73,7 +74,7 @@
 
                         
 
-                    </div>
+                    </div> 
 
                     <div class="card-footer bg-white border-0">
 

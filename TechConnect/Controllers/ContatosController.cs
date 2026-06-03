@@ -10,16 +10,19 @@ using TechConnect.Models;
 
 namespace TechConnect.Controllers
 {
+    // Controller responsável pelo gerenciamento de contatos (mensagens enviadas pelos usuários)
     public class ContatosController : Controller
     {
+        // Contexto do banco de dados da aplicação
         private readonly ApplicationDbContext _context;
 
+        // Injeção de dependência do DbContext
         public ContatosController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Contatos
+        // Lista todos os contatos ordenados pela data de envio (mais recentes primeiro)
         public async Task<IActionResult> Index()
         {
             var contatos = await _context.Contato
@@ -29,7 +32,7 @@ namespace TechConnect.Controllers
             return View(contatos);
         }
 
-        // GET: Contatos/Details/5
+        // Exibe os detalhes de um contato específico
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -39,6 +42,7 @@ namespace TechConnect.Controllers
 
             var contato = await _context.Contato
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (contato == null)
             {
                 return NotFound();
@@ -47,38 +51,39 @@ namespace TechConnect.Controllers
             return View(contato);
         }
 
-        // GET: Contatos/Create
+        // Carrega o formulário de criação de contato
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Contatos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Salva um novo contato no banco de dados
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nome,Email,Assunto,Mensagem")] Contato contato)
         {
             if (ModelState.IsValid)
             {
+                // Define a data de envio automaticamente no servidor
                 contato.DataEnvio = DateTime.Now;
 
                 _context.Add(contato);
                 await _context.SaveChangesAsync();
 
+                // Redireciona para tela de confirmação após envio
                 return RedirectToAction(nameof(ContatoEnviado));
             }
 
             return View(contato);
         }
 
+        // Tela de confirmação após envio do contato
         public IActionResult ContatoEnviado()
         {
             return View();
         }
 
-        // GET: Contatos/Edit/5
+        // Carrega o formulário de edição de contato
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,16 +92,16 @@ namespace TechConnect.Controllers
             }
 
             var contato = await _context.Contato.FindAsync(id);
+
             if (contato == null)
             {
                 return NotFound();
             }
+
             return View(contato);
         }
 
-        // POST: Contatos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Atualiza os dados do contato
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,Assunto,Mensagem,DataEnvio")] Contato contato)
@@ -124,12 +129,14 @@ namespace TechConnect.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
+
             return View(contato);
         }
 
-        // GET: Contatos/Delete/5
+        // Carrega a tela de confirmação de exclusão
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -139,6 +146,7 @@ namespace TechConnect.Controllers
 
             var contato = await _context.Contato
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (contato == null)
             {
                 return NotFound();
@@ -147,21 +155,24 @@ namespace TechConnect.Controllers
             return View(contato);
         }
 
-        // POST: Contatos/Delete/5
+        // Remove o contato do banco de dados
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var contato = await _context.Contato.FindAsync(id);
+
             if (contato != null)
             {
                 _context.Contato.Remove(contato);
             }
 
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
+        // Verifica se o contato existe no banco de dados
         private bool ContatoExists(int id)
         {
             return _context.Contato.Any(e => e.Id == id);

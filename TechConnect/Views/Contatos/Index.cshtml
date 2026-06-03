@@ -4,6 +4,8 @@
     ViewData["Title"] = "Contatos";
 }
 
+<!-- Container principal da página -->
+
 <div class="container mt-4">
 
     <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
@@ -16,21 +18,17 @@
             </p>
         </div>
 
+        <!-- Botão para cadastrar um novo contato -->
         <div>
-            <a asp-action="Create" class="btn btn-primary">
-                + Novo Contato
-            </a>
+            <a asp-action="Create" class="btn btn-primary"> + Novo Contato </a>           
         </div>
 
     </div>
-
+     <!-- Campo de busca dos contatos -->
     <div class="mb-4">
 
-        <input type="text"
-               id="buscarContato"
-               class="form-control"
-               placeholder="Buscar contato por nome, email ou assunto..." />
-
+        <input type="text" id="buscarContato" class="form-control" placeholder="Buscar contato por nome, email ou assunto..." />            
+          
     </div>
 
     <div class="row" id="listaContatos">
@@ -73,6 +71,8 @@
 
                     </div>
 
+                    
+
                     <div class="card-footer bg-white border-0">
 
                         <div class="d-flex justify-content-center gap-2 flex-wrap">
@@ -103,6 +103,8 @@
 </div>
 
 <script>
+
+    // Busca dinâmica dos contatos
 
     const buscaContato = document.getElementById('buscarContato');
 

@@ -4,88 +4,70 @@
     ViewData["Title"] = "Editar Evento";
 }
 
+<!-- Container principal da página -->
 <div class="container mt-4">
 
+    <!-- Card do formulário de edição -->
     <div class="card shadow border-0">
 
+        <!-- Cabeçalho da página -->
         <div class="card-header bg-warning text-dark">
             <h3>Editar Evento</h3>
         </div>
 
         <div class="card-body">
 
+            <!-- Formulário de edição do evento -->
             <form asp-action="Edit">
 
                 <input type="hidden" asp-for="Id" />
 
+                <!-- Exibição de erros de validação -->
                 <div asp-validation-summary="ModelOnly"
                      class="text-danger">
                 </div>
 
+                <!-- Informações principais do evento -->
                 <div class="mb-3">
-
-                    <label asp-for="Nome"
-                           class="form-label">
-                    </label>
-
-                    <input asp-for="Nome"
-                           class="form-control" />
-
+                    <label asp-for="Nome" class="form-label"> </label>
+                    <input asp-for="Nome" class="form-control" />
                 </div>
 
                 <div class="mb-3">
 
-                    <label asp-for="Descricao"
-                           class="form-label">
-                    </label>
-
-                    <textarea asp-for="Descricao"
-                              class="form-control"
-                              rows="5"></textarea>
+                    <label asp-for="Descricao" class="form-label"> </label>
+                    <textarea asp-for="Descricao" class="form-control" rows="5"> </textarea>
 
                 </div>
 
+                <!-- Data e horário do evento -->
                 <div class="row">
 
                     <div class="col-md-6 mb-3">
 
-                        <label asp-for="Data"
-                               class="form-label">
-                        </label>
-
-                        <input asp-for="Data"
-                               type="date"
-                               class="form-control" />
+                        <label asp-for="Data" class="form-label"> </label>
+                        <input asp-for="Data" type="date" class="form-control"/>
 
                     </div>
 
                     <div class="col-md-6 mb-3">
-
-                        <label asp-for="Horario"
-                               class="form-label">
-                        </label>
-
-                        <input asp-for="Horario"
-                               type="time"
-                               class="form-control" />
-
+                        <label asp-for="Horario" class="form-label"> </label>
+                        <input asp-for="Horario" type="time" class="form-control"/>
                     </div>
 
                 </div>
 
+                <!-- Local do evento -->
                 <div class="mb-3">
 
-                    <label asp-for="Local"
-                           class="form-label">
-                    </label>
-
-                    <input asp-for="Local"
-                           class="form-control" />
+                    <label asp-for="Local" class="form-label"> </label>
+                    <input asp-for="Local" class="form-control"/>
 
                 </div>
 
                 <hr class="my-4" />
 
+                <!-- Seleção de categorias -->
                 <h5 class="mb-3">
                     Categorias
                 </h5>
@@ -112,6 +94,7 @@
 
                 <hr class="my-4" />
 
+                <!-- Seleção de palestrantes -->
                 <h5 class="mb-3">
                     Palestrantes
                 </h5>
@@ -136,6 +119,7 @@
                     </div>
                 }
 
+                <!-- Campo para alterar a imagem do evento -->
                 <div class="mb-4">
 
                     <label asp-for="Imagem"
@@ -149,6 +133,7 @@
 
                 </div>
 
+                <!-- Pré-visualização da imagem -->
                 <div class="mb-4 text-center">
 
                     <img src="@Model.Imagem"
@@ -160,6 +145,7 @@
 
                 </div>
 
+                <!-- Botões de ação -->
                 <div class="d-flex gap-2 flex-wrap">
 
                     <button type="submit"
@@ -186,6 +172,7 @@
 
 </div>
 
+<!-- Scripts de validação e atualização da prévia da imagem -->
 @section Scripts {
 
     @{
@@ -194,6 +181,7 @@
 
     <script>
 
+        // Atualiza a pré-visualização da imagem em tempo real
         const inputImagem =
             document.getElementById("inputImagem");
 

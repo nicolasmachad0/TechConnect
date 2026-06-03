@@ -19,6 +19,7 @@ namespace TechConnect.Controllers
             _context = context;
         }
 
+        // Carrega lista de eventos com categorias e palestrantes
         public async Task<IActionResult> Index()
         {
             var eventos = await _context.Evento
@@ -38,6 +39,9 @@ namespace TechConnect.Controllers
         {
             return View();
         }
+
+        // PÁGINA DE ERRO
+        // Retorna erro padrão do sistema
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
